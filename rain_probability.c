@@ -114,6 +114,13 @@ int main(int argc, char *argv[]){
     float p[DAYSPERYEAR];
     int n = 188;
     int num_simulations = 5000;
+    if (argc == 2){
+        n = atoi(argv[1]);
+    }
+    if (argc == 3){
+        n = atoi(argv[1]);
+        num_simulations = atoi(argv[2]);
+    }
 
     // assign probability of rain for each day
     for (int i = 0; i < DAYSPERYEAR; i++){
