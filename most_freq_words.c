@@ -96,19 +96,6 @@ int compare_by_frequency(const void *a, const void *b){
     return node_b->count - node_a->count; // sort high to low
 }
 
-/* Free hash table dynamic memory 
-void free_hash_table(WordFreqNode **table){
-    for (int i = 0; i < HASH_TABLE_SIZE; ++i) {
-        WordFreqNode *node = table[i];
-        while (node) {
-            WordFreqNode *temp = node;
-            node = node->next;
-            free(temp->word);  // Free the word string
-            free(temp);         // Free the WordFreq node
-        }
-    }
-} */
-
 /*******************************************************************************
  * SOLUTION
  *******************************************************************************/
@@ -180,8 +167,6 @@ char **find_frequent_words(const char *path, int32_t n){
     char **result = malloc(n * sizeof(char *));
     if (!result){
         perror("Failed to allocate memory");
-        // free_hash_table(hash_table);
-        /* Free result array */
         return NULL;
     }
 
@@ -191,19 +176,12 @@ char **find_frequent_words(const char *path, int32_t n){
             result[i] = strdup(word_linked_list[i]->word);
             if (!result[i]) {
                 perror("Failed to allocate memory");
-                // Free the result array
-                //for (int j = 0; j < i; ++j) {
-                //    free(result[j]);
-                //}
                 free(result);
-                // Free the hash table
-                //free_hash_table(hash_table);
                 return NULL;
             }
         }
     }
 
-    //free_hash_table(hash_table);
     return result;
 }
 
